@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-wp-component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vite plugin + CLI for building WordPress components: bundle with Vite, generate PHP, deploy via FTP, and inject with WordPress shortcodes.",
   "license": "MIT",
   "author": "Gabriel Ruffinelli <gabsruff@gmail.com>",

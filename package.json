@@ -1,0 +1,48 @@
+{
+  "name": "vite-plugin-wp-component",
+  "version": "1.0.0",
+  "description": "Vite plugin + CLI for building WordPress components: bundle with Vite, generate PHP, deploy via FTP, and inject with WordPress shortcodes.",
+  "license": "MIT",
+  "author": "Gabriel Ruffinelli <gabsruff@gmail.com>",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    }
+  },
+  "bin": {
+    "wp-component": "./bin/cli.js"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "wordpress",
+    "shortcodes",
+    "php",
+    "ftp",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabsruff/vite-plugin-wp-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gabsruff/vite-plugin-wp-component/issues"
+  },
+  "homepage": "https://github.com/gabsruff/vite-plugin-wp-component#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.8.4",
+    "basic-ftp": "^5.0.5",
+    "commander": "^14.0.0",
+    "dotenv": "^17.2.2",
+    "yoctocolors": "^2.1.2"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0"
+  }
+}

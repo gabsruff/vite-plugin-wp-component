@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: <%= componentName %>
- * Description: <%= componentDescription %>
+ * Plugin Name: <%= componentName %> - Custom Component
+ * Description: <%= componentDescription %> | Insert the component using the shortcode: [<%= slug %>].
  * Version: 1.0.0
  * Author: <%= author %>
  */

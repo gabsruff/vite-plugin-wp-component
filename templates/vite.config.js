@@ -1,34 +1,32 @@
 import { defineConfig } from "vite";
-import crypto from "crypto";
 import wpComponentPlugin from "vite-plugin-wp-component";
-import { readConfig } from "vite-plugin-wp-component/utils/readConfig";
+import { readConfig } from "vite-plugin-wp-component/utils/readConfig.js";
 
 const config = await readConfig();
 
 export default defineConfig({
+  base: "./",
   build: {
-    lib: {
-      entry: "src/main.js",
-      name: config.slug,
-      fileName: "index.js",
-      cssFilename: "style.css",
-    },
-    outDir: "wp-plugin/assets", // destino directo dentro del plugin
+    outDir: "wp-plugin/assets",
     emptyOutDir: true,
     rollupOptions: {
       output: {
         format: "iife",
+        entryFileNames: "index.js",
+        assetFileNames: (assetInfo) => {
+          if (/\.css$/i.test(assetInfo.names)) {
+            return "style.css";
+          } else {
+            return "media/[name]-[hash][extname]";
+          }
+        },
       },
     },
   },
   css: {
     modules: {
       localsConvention: "camelCaseOnly",
-      generateScopedName: (name) => {
-        const buffer = crypto.randomBytes(2);
-        const hash = buffer.toString("hex");
-        return `${config.slug}-${name}-${hash}`;
-      },
+      generateScopedName: `[${config.slug}]__[local]___[hash:base64:5]`,
     },
     postcss: "./postcss.config.js",
   },

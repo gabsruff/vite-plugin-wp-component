@@ -20,7 +20,7 @@ This CLI scaffolds a new project with:
 - A demo component template showing how the workflow works
 - All required project structure
 
-```
+```bash
 npx wp-create-component
 ```
 
@@ -32,7 +32,7 @@ This is the fastest way to get started and ensures your setup follows the expect
 
 If you prefer to add the plugin manually to an existing Vite project, you can install it via npm:
 
-```
+```bash
 npm install vite-plugin-wp-component --save-dev
 ```
 
@@ -77,7 +77,7 @@ You can edit the following files directly or usin the CLI utility.
 
 You need an `.env` file with your FTP credentials:
 
-```
+```bash
 # FTP Credentials
 FTP_HOST=ftp.mydomain.com
 FTP_USER=username
@@ -94,13 +94,13 @@ FTP_REMOTE_DIR=/public_html/wp-content/plugins
 
 This file defines your component metadata:
 
-```
+```json
 {
-"name": "My Component",			// Name displayed in the WP plugins list
-"description": "Description",	// Description displayed in WP
-"author": "Your Name",			// Author name shown in WP
-"slug": "my-component",			// Unique slug, also used to generate the shortcode [my-component]
-"_hash": "abc123"				// Auto-regenerated whenever config is edited via CLI, used to generate the rootID.
+  "name": "My Component", // Name displayed in the WP plugins list
+  "description": "Description", // Description displayed in WP
+  "author": "Your Name", // Author name shown in WP
+  "slug": "my-component", // Unique slug, also used to generate the shortcode [my-component]
+  "_hash": "abc123" // Auto-regenerated whenever config is edited via CLI, used to generate the rootID.
 }
 ```
 
@@ -108,10 +108,10 @@ This file defines your component metadata:
 
 In your `vite.config.js` you can register the plugin:
 
-```
+```js
 import wpComponentPlugin from "vite-plugin-wp-component";
 
-export default {   plugins: [wpComponentPlugin()], };
+export default { plugins: [wpComponentPlugin()] };
 ```
 
 ### What does the plugin do?
@@ -136,15 +136,36 @@ It is **critical** to use `__COMPONENT_CONFIG__.rootID` so that both dev and pro
 
 Example in `index.html`:
 
-```
-<div id="__COMPONENT_CONFIG__.rootID"></div>
+```html
+<script type="module">
+  const root = document.createElement("div");
+  root.id = __COMPONENT_CONFIG__.rootID;
+  document.body.appendChild(root);
+</script>
 ```
 
 Example in your JS code:
 
-```
+```js
 const root = document.getElementById(__COMPONENT_CONFIG__.rootID); // Mount your app/framework here
 ```
+
+## `wp-component build` Output
+
+When you run `wp-component build`,it generates the necessary PHP bridge inside the `wp-plugin/` directory.
+
+The generated PHP file will:
+
+- **Create a WordPress plugin** using the metadata defined in `component.config.json`.
+- **Enqueue the bundled script** (`index.js`) into WordPress. This file contains both the component logic and the CSS styles. In production, styles are injected directly into a `<style>` tag.
+- **Register a new shortcode** in WordPress using the `slug` defined in `component.config.json`.  
+  When this shortcode is used, it will render the root element with the correct id, where your component is mounted:
+
+```html
+<div id="[slug+_hash]"></div>
+```
+
+This allows you to drop your component into any WordPress page or post simply by using the shortcode.
 
 ## Typical Workflow
 

@@ -32,6 +32,7 @@ export default defineConfig({
     modules: {
       //Translates our css-class to cssClass in javascript
       // e.g: element.className = styles.cssClass
+
       localsConvention: "camelCaseOnly",
       //This is the pattern to proccess the CSS classnames to avoid naming issues in production.
       generateScopedName: `[${config.slug}]__[local]___[hash:base64:5]`,

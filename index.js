@@ -1,4 +1,5 @@
 import { readConfig } from "./utils/readConfig.js";
+import { cleanBundle } from "./utils/cleanBundle.js";
 
 export default async function wpComponentPlugin(options = {}) {
   const config = await readConfig();
@@ -12,6 +13,9 @@ export default async function wpComponentPlugin(options = {}) {
           __COMPONENT_CONFIG__: JSON.stringify(config),
         },
       };
+    },
+    async closeBundle() {
+      cleanBundle();
     },
   };
 }

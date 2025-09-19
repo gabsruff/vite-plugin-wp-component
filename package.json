@@ -30,9 +30,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gabsruff/vite-plugin-wp-component.git"
+    "url": "git+https://github.com/gabsruff/create-wp-component.git"
   },
-  "homepage": "https://github.com/gabsruff/vite-plugin-wp-component#readme",
+  "homepage": "https://github.com/gabsruff/create-wp-component.git#readme",
   "engines": {
     "node": ">=18"
   },
